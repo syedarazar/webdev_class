@@ -1,8 +1,11 @@
-import requests
+#Maintainer Qamber Mehdi
+# Created on August 25, 2018
+
+import requests, json
 
 def search_businesses(search_term, search_location):
 
-    api_key = "1v3wLTvtgy5cx2BIveW8Yqtx8kNXksFF9OiEpo9AvTXn_jbADvI9zjPO2iPCPT7QwF3KUg_N-6b6sc6-oAbuDEg6DyaFzA1vz-GJVB2hUuMLubYyNMYXRoLtfm5_W3Yx"
+    api_key = "z6Ki-01wJkXzlDyFkdLMp-uhkqdC5ZnMJmQH2QdXfpYU3Z15zh5HbVhCM24LNiQ1BVib8rwP5PLMPATJblk3tuAVjfw_rp5w37w1SiXSKR1YXp0mOmCY-ZCVvotWW3Yx"
 
     url = "https://api.yelp.com/v3/businesses/search"
 
@@ -13,13 +16,16 @@ def search_businesses(search_term, search_location):
     my_params = {
         "term": search_term,
         "location": search_location,
-        "limit": 4,
+        "limit": 3,
     }
 
     businesses_object = requests.get(url, headers=my_headers, params=my_params)
 
-    businesses_dict = businesses_object.text
+    businesses_dict = json.loads(businesses_object.text)
 
-    print(businesses_dict)
-
-search_businesses("restaurants", "chicago")
+    businesses_list = businesses_dict['businesses']
+    #
+    list_of_businesses = []
+    for each in businesses_list:
+        list_of_businesses.append(each)
+return list_of_businesses
