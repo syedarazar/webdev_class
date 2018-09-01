@@ -28,4 +28,4 @@ def search_businesses(search_term, search_location):
     list_of_businesses = []
     for each in businesses_list:
         list_of_businesses.append(each)
-return list_of_businesses
+    return list_of_businesses
